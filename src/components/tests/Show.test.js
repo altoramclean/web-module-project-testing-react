@@ -3,6 +3,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Show from './../Show';
+import Episode from '../Episode';
+import Loading from '../Loading';
 
 const testShow = {
     name: "Stranger Things",
@@ -43,7 +45,7 @@ test('renders testShow and no selected Season without errors', ()=>{
 
 test('renders Loading component when prop show is null', () => {
     render(<Show show = {null}/>);
-    const loading = screen.queryByTestId('loading-container');
+    const loading = screen.queryByTestId("loading-container");
     expect(loading).toBeInTheDocument();
 });
 

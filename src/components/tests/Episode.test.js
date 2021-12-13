@@ -43,3 +43,4 @@ test("renders default image when image is not defined", ()=>{
     expect(image).toBeTruthy();
 })
 
+// the test renders default image passes when i do toBeTruthy rather than toBeInTheDocument
