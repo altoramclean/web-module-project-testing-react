@@ -6,24 +6,21 @@ import Show from './../Show';
 
 const testShow = {
     name: "Stranger Things",
-    summary: "Movie summary: After the mysterious and sudden vanishing of a young boy, the people of a small town begin to uncover secrets of a government lab, portals to another world and sinister monsters. The boy's mother (Joyce) desperately tries to find him, convinced he is in grave danger, while the police chief searches for answers",
+    summary: "Movie summary",
     seasons:[{
-// Season 1
   id: 0,
     name: "Season 1",
-    episodes: []
+    episode: []
 },
 
-// Season 2
 {   id: 1,
     name: "Season 2",
-    episodes: []
+    episode: []
 },
 
-// Season 3
 {   id: 2,
     name: "Season 3",
-    episodes: []
+    episode: []
 }
 
 ]
@@ -31,22 +28,22 @@ const testShow = {
 
 const testShow2 = {
     name: "Stranger Things 2",
-    summary: "Movie summary: After the mysterious and sudden vanishing of a young boy, the people of a small town begin to uncover secrets of a government lab, portals to another world and sinister monsters. The boy's mother (Joyce) desperately tries to find him, convinced he is in grave danger, while the police chief searches for answers",
+    summary: "Movie summary",
     seasons:[{
         id: 0,
         name: "Season 1",
-        episodes:[]
+        episode:[]
     }]
 }
 
 
 test('renders testShow and no selected Season without errors', ()=>{
-    render( <Show show = {testShow} selectedSeason = { "none" }/>)
+    render(<Show show = {testShow} selectedSeason = { "none" }/>)
 });
 
 test('renders Loading component when prop show is null', () => {
-    render( <Show show = {null} />)
-    const loading = screen.queryByText('Fetching data...');
+    render(<Show show = {null}/>);
+    const loading = screen.queryByTestId('loading-container');
     expect(loading).toBeInTheDocument();
 });
 
@@ -67,10 +64,10 @@ test('handleSelect is called when an season is selected', () => {
 
 test('component renders when no seasons are selected and when rerenders with a season passed in', () => {
     const { rerender } = render(<Show show={testShow} selectedSeason={'none'}/>);
-    let episodes  = screen.queryAllByTestId('episodes-container')
+    let episodes  = screen.queryByTestId('episodes-container');
     expect(episodes).not.toBeInTheDocument();
 
-    rerender(<Show show={testShow} selectedSeason={0}/>)
-    episodes  = screen.queryAllByTestId('episodes-container')
+    rerender(<Show show={testShow} selectedSeason={1}/>)
+    episodes  = screen.queryByTestId('episodes-container');
     expect(episodes).toBeInTheDocument();
 });
