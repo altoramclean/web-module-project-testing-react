@@ -4,49 +4,45 @@ import Episode from './../Episode';
 
 const testEpisode = {
     id:1,
-    name: "",
-    image: "http://static.tvmaze.com/uploads/images/medium_landscape/67/168918.jpg",
+    name: "episode",
+    image: "image",
     season: 1,
     number: 1,
-    summary: "Movie summary: After the mysterious and sudden vanishing of a young boy, the people of a small town begin to uncover secrets of a government lab, portals to another world and sinister monsters. The boy's mother (Joyce) desperately tries to find him, convinced he is in grave danger, while the police chief searches for answers",
+    summary: "blah",
     runtime: 1
 }
 
 const testEpisodeWithoutImage = {
     id: 1,
-    name: "",
-    image: "",
+    name: "episode",
+    image: "null",
     season: 1,
     number: 1,
-    summary: "",
+    summary: "blah",
     runtime: 1
 }
 
 
-
-
-
-
 test("renders without error", () => {
-    render(<Episode episode = { testEpisode } />);
 
+    render(<Episode episode={testEpisode}/>)
 });
 
 test("renders the summary test passed as prop", ()=>{
-render(<Episode episode = { testEpisode } />);
 
-const summary = screen.queryByText(/ test /i);
-
-expect(summary).toBeInTheDocument();
-expect(summary).toBeTruthy();
-expect(summary).toHaveTextContent("Test Summary");
+    render(<Episode episode={testEpisode} />);
+    
+    const summary = screen.queryByText(/blah/i);
+    expect(summary).toBeInTheDocument();
+    expect(summary).toHaveTextContent(/blah/i);
+    expect(summary).toBeTruthy();
 });
 
+test("renders default image when image is not defined", ()=>{
 
-test("renders default image when image is not defined", ()=>{ render(<Episode episode = { testEpisode } />);
+    render(<Episode episode={testEpisodeWithoutImage}/>);
 
-const img = screen.queryByAltText("./stranger_things.png");
-
-expect(img).toBeInTheDocument();
+    const image = screen.queryAllByAltText('./stranger_things.png');
+    expect(image).toBeTruthy();
 })
 
